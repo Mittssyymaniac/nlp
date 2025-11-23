@@ -1,4 +1,6 @@
-#regx
+#regex
+#-- lets look at a simple scrapping tool --
+#-- this tool would extract all mail-ids --
 import re
 s = """Pranay Raj Parisha  1st degree connection1st
 Actively Looking forward to Summer Internships 2019
@@ -83,10 +85,6 @@ for email in match:
 ## + -> one or more chars
 ## [\w\.-]+ -> I am looking for alpha num chars
 
-
-
-
-
 import re
 
 
@@ -99,17 +97,11 @@ else:
   print('did not find')
 
 ## Example to extract Phone numbers with extension
-
-
-
-
 ## Regex to check phone number, using VERBOSE
 ## you can spread the regular expression over multiple
 ## lines with comments like this:
 #--------------
 import re
-
-
 phoneRegex = re.compile(r'''(
  (\d{3}|\(\d{3}\))?             #area code
  (\s|-|\.)?                     #separator
@@ -118,34 +110,21 @@ phoneRegex = re.compile(r'''(
  \d{4}                          #last 4 digits
  (\s*(ext|x|ext.)\s*\d{2,5})?   # extension
  )''', re.VERBOSE)
-
-
 mo1 = phoneRegex.search('Your no. is 022-2527-7413 ext 123')
-
-
 if mo1 :
  print(mo1.group())
 else :
  print("none")
-
-
 mo2 = phoneRegex.search('Your no. is (022)-2527-7413')
-
-
 if mo2 :
  print(mo2.group())
 else :
  print("none")
-
-
 mo3 = phoneRegex.search('Your no. is 98700-14450')
-
-
 if mo3 :
  print(mo3.group())
 else :
  print("none")
-
 
 import re
 
@@ -157,7 +136,6 @@ if match:
   print('found', match.group())
 else:
   print('did not find')
-
 
 match=re.search(r'ii','piig')
 if match:
@@ -176,11 +154,13 @@ if match:
   print('found', match.group())
 else:
   print('did not find')
-str = 'purple alice-b@google.com monkey bob-h@gmail.in dishwasher'
-  match = re.search(r'([\w.-]+)@([\w+.-]+\.\w+)', str)
-  if match:
-    print(match.group())
 
+import re
+
+str = 'purple alice-b@google.com monkey bob-h@gmail.in dishwasher'
+match = re.search(r'([\w.-]+)@([\w+.-]+\.\w+)', str)
+if match:
+  print(match.group())
 
 str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
 emails = re.findall(r'[\w\.-]+@[\w\.-]+', str) ## ['alice@google.com', 'bob@abc.com']
