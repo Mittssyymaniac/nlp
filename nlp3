@@ -1,0 +1,187 @@
+import re
+s = """Pranay Raj Parisha  1st degree connection1st
+Actively Looking forward to Summer Internships 2019
+parishapranayraj97@gmail.com Thank you for sharing!
+Like Like Pranay Raj Parisha's comment Reply
+2d
+
+
+MAYANK WADHWANI
+MAYANK WADHWANI  1st degree connection1st
+Events Executive at CSEA
+please share a copy
+mayank343@gmail.com
+Like Like MAYANK WADHWANI'S comment Reply
+6d
+
+
+Priyam Sareen
+Priyam Sareen  1st degree connection1st
+Student at Indian Institute of Technology, Kanpur
+please mail to sareenpriyam@gmail.com
+Like Like Priyam Sareen's comment Reply
+3d
+
+
+Hansa Maheshwari
+Hansa Maheshwari  1st degree connection1st
+Student at Indian Statistical Institute
+furious.hansa@gmail.com
+Like Like Hansa Maheshwari's comment Reply
+6d
+
+
+Ayush Agarwala
+Ayush Agarwala  1st degree connection1st
+Tech enthusiast | Android app developer | Backend developer | BTECH CSE at NIT SILCHAR
+ayush.code.05@gmail.com
+Like Like Ayush Agarwala's comment Reply
+1w
+
+
+Mayank Sharma
+Mayank Sharma  1st degree connection1st
+Student at SRM University
+Pls share with me also  mayanksharma1902@gmail.com  (edited)
+
+
+Like Like Mayank Sharma's comment Reply
+2h
+
+
+Oindrila Choudhury
+Oindrila Choudhury  2nd degree connection2nd
+Student at SRM University
+Hi , I would like to have a copy of it.  Email I'd oindie3@gmail.com
+Like Like Oindrila Choudhury's comment Reply
+6h
+
+
+Aravind Muthukrishnan
+Aravind Muthukrishnan  3rd degree connection3rd
+Quality Analyst at PM AM IT Services
+Kindly share 1 copy with me at m_arvind93@yahoo.com
+Thanks in advance
+Like Like Aravind Muthukrishnan's comment Reply
+
+
+My email is rockyjagtani@gmail.com please connect back thank you
+please cc to abc-nlp@vit.edu.in
+"""
+
+
+match = re.findall(r'[\w\.-]+@[\w\.-]+', s)
+
+
+for email in match:
+    print(email)
+
+
+## \w -> 0 to 9, a to z , A to Z , _
+## \. -> look only for dot
+## + -> one or more chars
+## [\w\.-]+ -> I am looking for alpha num chars
+
+
+
+
+
+import re
+
+
+str = 'an example word: cat is jumping !!'
+match = re.search(r'word:[\w\s]+', str)
+# If-statement after search() tests if it succeeded
+if match:
+  print('found', match.group()) ## 'found word:cat'
+else:
+  print('did not find')
+
+## Example to extract Phone numbers with extension
+
+
+
+
+## Regex to check phone number, using VERBOSE
+## you can spread the regular expression over multiple
+## lines with comments like this:
+#--------------
+import re
+
+
+phoneRegex = re.compile(r'''(
+ (\d{3}|\(\d{3}\))?             #area code
+ (\s|-|\.)?                     #separator
+ \d{4}                          #first 4 digits
+ (\s|-|\.)                      #separator
+ \d{4}                          #last 4 digits
+ (\s*(ext|x|ext.)\s*\d{2,5})?   # extension
+ )''', re.VERBOSE)
+
+
+mo1 = phoneRegex.search('Your no. is 022-2527-7413 ext 123')
+
+
+if mo1 :
+ print(mo1.group())
+else :
+ print("none")
+
+
+mo2 = phoneRegex.search('Your no. is (022)-2527-7413')
+
+
+if mo2 :
+ print(mo2.group())
+else :
+ print("none")
+
+
+mo3 = phoneRegex.search('Your no. is 98700-14450')
+
+
+if mo3 :
+ print(mo3.group())
+else :
+ print("none")
+
+
+import re
+
+
+str = 'an example word is 7756941233'
+match = re.search(r'[89][0-9]{9}', str)
+# If-statement after search() tests if it succeeded
+if match:
+  print('found', match.group())
+else:
+  print('did not find')
+
+
+match=re.search(r'ii','piig')
+if match:
+  print('found', match.group())
+else:
+  print('did not find')
+
+match=re.search(r'ab*c', 'abbbbbrefc')
+if match:
+  print('found', match.group())
+else:
+  print('did not find')
+
+match=re.search(r'o*','pii485g')
+if match:
+  print('found', match.group())
+else:
+  print('did not find')
+str = 'purple alice-b@google.com monkey bob-h@gmail.in dishwasher'
+  match = re.search(r'([\w.-]+)@([\w+.-]+\.\w+)', str)
+  if match:
+    print(match.group())
+
+
+str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
+emails = re.findall(r'[\w\.-]+@[\w\.-]+', str) ## ['alice@google.com', 'bob@abc.com']
+for email in emails:
+   print(email)
