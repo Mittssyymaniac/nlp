@@ -1,13 +1,13 @@
 #HMM
 !pip install hmmlearn
 
-1) Problem setup
+#1) Problem setup
 import numpy as np
 from hmmlearn import hmm
 
 
 states = ["Rainy", "Cloudy", "Sunny"]          
-observations = ["Happy", "Sad"]                
+observations = ["Happy", "Sad"]          
 
 
 n_states = len(states)
@@ -16,66 +16,45 @@ n_obs = len(observations)
 
 print("Number of hidden states:", n_states)
 print("Number of observation symbols:", n_obs)
-
-2) Model parameters (probabilities must each row-sum to 1)
-
-startprob = np.array([0.2, 0.3, 0.5]) 
-
+#2)Model parameters (probabilities must each row-sum to 1)
+startprob = np.array([0.2, 0.3, 0.5])  
 
 
 transmat = np.array([
-    [0.6,  0.3,   0.1],   # from Rainy
-    [0.2,  0.5,   0.3],   # from Cloudy
-    [0.1,  0.3,   0.6],   # from Sunny
+    [0.6,  0.3,   0.1],  
+    [0.2,  0.5,   0.3],   
+    [0.1,  0.3,   0.6],  
 ])
 
-
-
 emissionprob = np.array([
-    [0.1, 0.9],   # Rainy
-    [0.4, 0.6],   # Cloudy
-    [0.8, 0.2],   # Sunny
+    [0.1, 0.9],   
+    [0.4, 0.6],  
+    [0.8, 0.2],  
 ])
 
 
 print("\nStart probability:", startprob)
 print("Transition probability:\n", transmat)
 print("Emission probability (rows=states, cols=[Happy,Sad]):\n", emissionprob)
-
-
-
-
-3) Build a Categorical HMM in hmmlearn
+#3)Build a Categorical HMM in hmmlearn
 model = hmm.CategoricalHMM(n_components=n_states, n_iter=1, init_params="")
-
 model.startprob_   = startprob
 model.transmat_    = transmat
 model.emissionprob_ = emissionprob
-
-
-
-
-
-4) Encode an observation sequence (Happy, Happy, Sad)  In hmmlearn, observations are integer-encoded: Happy->0, Sad->1
-
-
-
+#4)Encode an observation sequence (Happy, Happy, Sad) In hmmlearn, observations are integer-encoded: Happy->0, Sad->1
+obs_map = {"Happy": 0, "Sad": 1}
 inv_obs_map = {v: k for k, v in obs_map.items()}
 
 
 obs_sequence_labels = ["Happy", "Happy", "Sad"]
-obs_sequence = np.array([[obs_map[o]] for o in obs_sequence_labels])  # shape (T,1)
+obs_sequence = np.array([[obs_map[o]] for o in obs_sequence_labels])  
 
 
 print("\nObservations:")
 for o in obs_sequence_labels:
     print(o)
-
-
-5) Viterbi: most likely hidden-state path for the given observations
-
-
-hidden_state_ids = model.predict(obs_sequence)   
+#5)Viterbi: most likely hidden-state path for the given observations
+hidden_state_ids = model.predict(obs_sequence)  
 hidden_state_labels = [states[i] for i in hidden_state_ids]
 
 
