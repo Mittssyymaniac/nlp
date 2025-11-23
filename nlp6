@@ -6,8 +6,8 @@ import numpy as np
 from hmmlearn import hmm
 
 
-states = ["Rainy", "Cloudy", "Sunny"]          # hidden states
-observations = ["Happy", "Sad"]                # observed symbols
+states = ["Rainy", "Cloudy", "Sunny"]          
+observations = ["Happy", "Sad"]                
 
 
 n_states = len(states)
@@ -19,11 +19,10 @@ print("Number of observation symbols:", n_obs)
 
 2) Model parameters (probabilities must each row-sum to 1)
 
-startprob = np.array([0.2, 0.3, 0.5])  # P(Rainy)=0.2, P(Cloudy)=0.3, P(Sunny)=0.5
+startprob = np.array([0.2, 0.3, 0.5]) 
 
 
-# State transition probabilities: P(next_state | current_state)
-#           To:   Rainy  Cloudy Sunny
+
 transmat = np.array([
     [0.6,  0.3,   0.1],   # from Rainy
     [0.2,  0.5,   0.3],   # from Cloudy
@@ -31,9 +30,7 @@ transmat = np.array([
 ])
 
 
-# Emission probabilities: P(observation | state)
-# Columns are [Happy, Sad]
-# eg: if it's Rainy, P(Happy)=0.1, P(Sad)=0.9, etc.
+
 emissionprob = np.array([
     [0.1, 0.9],   # Rainy
     [0.4, 0.6],   # Cloudy
@@ -50,7 +47,7 @@ print("Emission probability (rows=states, cols=[Happy,Sad]):\n", emissionprob)
 
 3) Build a Categorical HMM in hmmlearn
 model = hmm.CategoricalHMM(n_components=n_states, n_iter=1, init_params="")
-# We supply parameters directly (so we disable internal initialization with init_params="")
+
 model.startprob_   = startprob
 model.transmat_    = transmat
 model.emissionprob_ = emissionprob
@@ -62,7 +59,7 @@ model.emissionprob_ = emissionprob
 4) Encode an observation sequence (Happy, Happy, Sad)  In hmmlearn, observations are integer-encoded: Happy->0, Sad->1
 
 
-# obs_map = {"Happy": 0, "Sad": 1}
+
 inv_obs_map = {v: k for k, v in obs_map.items()}
 
 
@@ -78,7 +75,7 @@ for o in obs_sequence_labels:
 5) Viterbi: most likely hidden-state path for the given observations
 
 
-hidden_state_ids = model.predict(obs_sequence)   # Viterbi
+hidden_state_ids = model.predict(obs_sequence)   
 hidden_state_labels = [states[i] for i in hidden_state_ids]
 
 
